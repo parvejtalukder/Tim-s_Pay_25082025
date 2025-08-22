@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payoo MFS</title>
+    <!-- DaisyUI -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="../tailwind.config.css"> 
+    <!-- Font-Awsome  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css">
+</head>
+<!-- Main Body  -->
+<body class="bg-[#34363b] h-screen flex flex justify-center">
+    <!-- Container  -->
+    <div class="w-auto bg-white">
+        <!-- Header Nav Start  -->
+        <div class="flex justify-between items-center pl-[24px] pr-[24px] gap-[131px] mt-3">
+            <!-- Header Logo and Balance  -->
+            <div class="flex justify-center items-center gap-3">
+                <img src="../assets/Group.png" alt="Logo" class="h-[44px]">
+                <div class="flex flex-col justify-center items-start">
+                    <h2 class="font-bold">$<span>45000</span></h2>
+                    <p class="text-[#08080880]">Available Balance</p>
+                </div>
+            </div>
+            <!-- Header Logout Btn  -->
+            <div class="mt-1">
+                <button class="btn btn-soft text-[#08080880]"><i class="fa fa-sign-out -rotate-180 text-[#000000]" aria-hidden="true"></i> Log Out</button>
+            </div>
+        </div>
+        <hr class="border-gray-400 mt-[18px]">
+        <!-- Text Box Below Nav  -->
+        <div class="pl-[24px] pr-[24px] mt-8 flex flex-col gap-[12px]">
+            <h2 class="font-bold text-2xl leading-8">🔥 Welcome to Payooo!</h2>
+            <p class="font-normal text-[16px] leading-[26px] text-[#08080880]">Enjoy easy and convenient financial services with us <br> Cashout charge is low and </p>
+        </div>
+        <!-- Option Icons -->
+        <div class="grid grid-cols-3 mt-[24px] pl-[24px] pr-[24px] gap-4">
+            <div class="border border-gray-400 flex flex-col text-center justify-center items-center h-[90px] w-[123px] rounded-[12px]">
+                <img src="../assets/wallet1.png" alt="addMoney">
+                <p class="text-[#08080880] text-[14px] mt-[8px]">Add Money</p>
+            </div>
+            <div class="border border-gray-400 flex flex-col text-center justify-center items-center h-[90px] w-[123px] rounded-[12px]">
+                <img src="../assets/send1.png" alt="cashOut">
+                <p class="text-[#08080880] text-[14px] mt-[8px]">Cashout</p>
+            </div>
+            <div class="border border-gray-400 flex flex-col text-center justify-center items-center h-[90px] w-[123px] rounded-[12px]">
+                <img src="../assets/money1.png" alt="transferMoney">
+                <p class="text-[#08080880] text-[14px] mt-[8px]">Transfer Money</p>
+            </div>
+            <div class="border border-gray-400 flex flex-col text-center justify-center items-center h-[90px] w-[123px] rounded-[12px]">
+                <img src="../assets/bonus1.png" alt="getBonus">
+                <p class="text-[#08080880] text-[14px] mt-[8px]">Get Bonus</p>
+            </div>
+            <div class="border border-gray-400 flex flex-col text-center justify-center items-center h-[90px] w-[123px] rounded-[12px]">
+                <img src="../assets/purse1.png" alt="payBill">
+                <p class="text-[#08080880] text-[14px] mt-[8px]">Pay Bill</p>
+            </div>
+            <div class="border border-gray-400 flex flex-col text-center justify-center items-center h-[90px] w-[123px] rounded-[12px]">
+                <img src="../assets/transaction1.png" alt="transaction">
+                <p class="text-[#08080880] text-[14px] mt-[8px]">Transactions</p>
+            </div>
+        </div>
+    </div>
+    <script src="../scripts/home.js"></script>
+</body>
+</html>
