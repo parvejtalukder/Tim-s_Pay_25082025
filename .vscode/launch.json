@@ -1,0 +1,19 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Open index.html",
+            "file": "/home/parvej/Academic/Payoo/index.html",
+            "runtimeExecutable": "/usr/bin/google-chrome"
+        },
+        {
+            "type": "chrome",
+            "name": "http://127.0.0.1:3000/index.html",
+            "request": "launch",
+            "url": "http://127.0.0.1:3000/index.html",
+            "runtimeExecutable": "/usr/bin/google-chrome"
+        }
+    ]
+}

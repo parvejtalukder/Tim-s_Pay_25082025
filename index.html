@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payoo MFS</title>
+    <!-- DaisyUI -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <!-- TaildWind CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="./tailwind.css">
+</head>
+<body class="bg-[#F4F5F7] h-[100vh] flex flex-col justify-center items-center">
+    <!-- For Logo  -->
+     <div class="w-[350px] h-[100px] bg-[url('./assets/bg.png')] bg-cover bg-no-repeat flex justify-center items-center">
+        <img src="./assets/Group.png" alt="Logo">
+     </div>
+    <!-- For Input Box  -->
+    <div class="p-8 bg-white rounded-2xl w-[350px]">
+        <!-- Input Form  -->
+        <form>
+            <!-- Mobile Number  -->
+            <div>
+                <label for="mobile-number" class="font-bold">Mobile Number</label> <br>
+                <input type="text" placeholder="Enter your number" class="input bg-[#F4F5F7] mt-3 rounded-3xl" />
+            </div>
+            <!-- 4 Digit Pin  -->
+            <div class="mt-5">
+                <label for="mobile-number" class="font-bold">4 Digit Pin</label> <br>
+                <input type="text" placeholder="Enter 4 digit PIN" class="input bg-[#F4F5F7] mt-3 rounded-3xl" />
+            </div>
+            <!-- Button -->
+            <button class="btn btn-primary mt-5 w-full rounded-3xl bg-[#0874F2] border-0">Login</button>
+        </form>
+    </div>
+    <script src="./scripts/index.js"></script>
+</body>
+</html>
