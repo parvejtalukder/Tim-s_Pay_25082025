@@ -5,6 +5,8 @@ const ACCOUNT_PIN = 2468;
 // BALANCE 
 let balanceCurrent = parseInt(document.getElementById("balanceToUse").innerText);
 // AGENT LIST
+// COUPON
+const ACCOUNT_COUPON = "X1Y2Z3";
 // HOME FUNC
 function goHome() {
     document.getElementById("addMoney-Window").style.display = "none";
@@ -52,6 +54,15 @@ document.getElementById("transferMoney-Btn").addEventListener("click", function(
     document.getElementById("transferMoney-Window").style.display = "block";
     document.getElementById("payBill-Window").style.display = "none";
     document.getElementById("getBonus-Window").style.display = "none";
+    document.getElementById("transactions-Window").style.display = "none";
+})
+document.getElementById("getBonus-Btn").addEventListener("click", function(event){
+    event.preventDefault();
+    document.getElementById("addMoney-Window").style.display = "none";
+    document.getElementById("cashOut-Window").style.display = "none";
+    document.getElementById("transferMoney-Window").style.display = "none";
+    document.getElementById("payBill-Window").style.display = "none";
+    document.getElementById("getBonus-Window").style.display = "block";
     document.getElementById("transactions-Window").style.display = "none";
 })
 // AC Handlilng 
@@ -115,5 +126,17 @@ document.getElementById("transferMoneyBtn").addEventListener("click", function(e
         }
     } else {
         alert("Wrong Information!");
+    }
+}) 
+// GetBonus
+document.getElementById("getBonusBtn").addEventListener("click", function(event){
+    const coupon = document.getElementById("bonusCoupon").value;
+    console.log(coupon);
+    if (coupon === ACCOUNT_COUPON) {
+        balanceCurrent = balanceCurrent + 100;
+        document.getElementById("balanceToUse").innerText = balanceCurrent;
+        alert(coupon + "BDT Bonus Added!");
+    } else {
+        alert("Invalid Coupon!");
     }
 }) 
