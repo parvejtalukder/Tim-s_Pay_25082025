@@ -205,12 +205,10 @@ function aboutTransaction(type, amount) {
 function handleTransactions() {
   getElement("transactions-Btn").addEventListener("click", (event) => {
     const headDivofHistory = getElement("transaction-history");
-    // headDivofHistory.innerHTML = ""; 
-    if (transactionData.length === 0) {
-      headDivofHistory.innerHTML = `<p class="text-center text-gray-500 mt-4">No transactions yet.</p>`;
-      return; 
-    }
-    for(const history of transactionData) {
+    headDivofHistory.innerHTML = ""; 
+    
+    const lastFourTrctns = transactionData.slice(-4);
+    for(const history of lastFourTrctns) {
       const historyDiv = document.createElement("div");
       historyDiv.innerHTML = `
         <div class="bg-white rounded-xl p-3 flex justify-between items-center mt-3">
