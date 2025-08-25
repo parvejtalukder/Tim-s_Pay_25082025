@@ -1,142 +1,247 @@
-// ACCOUNT INFO
+// ACCOUNT INFORMATION 
 const ACCOUNT_NAME = "Md Parvej Husen Talukder";
-const ACCOUNT_NO = parseInt("01716884927");
+const ACCOUNT_NO_STR = "01716884927"; 
 const ACCOUNT_PIN = 2468;
-// BALANCE 
-let balanceCurrent = parseInt(document.getElementById("balanceToUse").innerText);
-// AGENT LIST
-// COUPON
 const ACCOUNT_COUPON = "X1Y2Z3";
-// HOME FUNC
-function goHome() {
-    document.getElementById("addMoney-Window").style.display = "none";
-    document.getElementById("cashOut-Window").style.display = "none";
-    document.getElementById("transferMoney-Window").style.display = "none";
-    document.getElementById("payBill-Window").style.display = "none";
-    document.getElementById("getBonus-Window").style.display = "none";
-    document.getElementById("transactions-Window").style.display = "none";
+// DYNAMIC DATA 
+let transactionData = [];
+let balanceCurrent = parseInt(document.getElementById("balanceToUse").innerText);
+//FUNCTIONS
+function getElement(id) {
+  return document.getElementById(id); 
 }
-goHome();
-// console.log("This is for Home")
-document.getElementById("loginBtn").addEventListener("click", function(event){
-    window.location.href = "../index.html";
-})
-// togoling
-// Home 
-document.getElementById("homeLogo").addEventListener("click", function(event){
+function getValue(id) {
+  return getElement(id).value;
+}
+function getIntValue(id) {
+  return parseInt(getValue(id));  
+}
+function showAlert(message) {
+  alert(message); 
+}
+
+// NAV
+function goHome() {
+  const windowIds = [
+    "addMoney-Window",
+    "cashOut-Window",
+    "transferMoney-Window",
+    "payBill-Window",
+    "getBonus-Window",
+    "transactions-Window",
+  ];
+  for(const window of windowIds) {
+    const element = getElement(window);
+    // console.log(element);
+    element.style.display = "none";
+  }
+}
+
+// Togoles
+function setupWindowToggles() {
+  getElement("homeLogo").addEventListener("click", goHome);
+
+  getElement("addMoney-Btn").addEventListener("click", (event) => {
+    event.preventDefault(); 
     goHome();
-})
-// Add Money 
-document.getElementById("addMoney-Btn").addEventListener("click", function(event){
+    getElement("addMoney-Window").style.display = "block";
+  });
+
+  getElement("cashOut-Btn").addEventListener("click", (event) => {
     event.preventDefault();
-    document.getElementById("addMoney-Window").style.display = "block";
-    document.getElementById("cashOut-Window").style.display = "none";
-    document.getElementById("transferMoney-Window").style.display = "none";
-    document.getElementById("payBill-Window").style.display = "none";
-    document.getElementById("getBonus-Window").style.display = "none";
-    document.getElementById("transactions-Window").style.display = "none";
-})
-// Cash Out 
-document.getElementById("cashOut-Btn").addEventListener("click", function(event){
+    goHome();
+    getElement("cashOut-Window").style.display = "block";
+  });
+
+  getElement("transferMoney-Btn").addEventListener("click", (event) => {
     event.preventDefault();
-    document.getElementById("addMoney-Window").style.display = "none";
-    document.getElementById("cashOut-Window").style.display = "block";
-    document.getElementById("transferMoney-Window").style.display = "none";
-    document.getElementById("payBill-Window").style.display = "none";
-    document.getElementById("getBonus-Window").style.display = "none";
-    document.getElementById("transactions-Window").style.display = "none";
-})
-// Transfer Money 
-document.getElementById("transferMoney-Btn").addEventListener("click", function(event){
+    goHome();
+    getElement("transferMoney-Window").style.display = "block";
+  });
+
+  getElement("getBonus-Btn").addEventListener("click", (event) => {
     event.preventDefault();
-    document.getElementById("addMoney-Window").style.display = "none";
-    document.getElementById("cashOut-Window").style.display = "none";
-    document.getElementById("transferMoney-Window").style.display = "block";
-    document.getElementById("payBill-Window").style.display = "none";
-    document.getElementById("getBonus-Window").style.display = "none";
-    document.getElementById("transactions-Window").style.display = "none";
-})
-document.getElementById("getBonus-Btn").addEventListener("click", function(event){
+    goHome();
+    getElement("getBonus-Window").style.display = "block";
+  });
+
+   getElement("payBill-Btn").addEventListener("click", (event) => {
     event.preventDefault();
-    document.getElementById("addMoney-Window").style.display = "none";
-    document.getElementById("cashOut-Window").style.display = "none";
-    document.getElementById("transferMoney-Window").style.display = "none";
-    document.getElementById("payBill-Window").style.display = "none";
-    document.getElementById("getBonus-Window").style.display = "block";
-    document.getElementById("transactions-Window").style.display = "none";
-})
-// AC Handlilng 
-// Add Money Handling
-document.getElementById("addMoneyBtn").addEventListener("click", function(event){
+    goHome();
+    getElement("payBill-Window").style.display = "block";
+  });
+  
+  getElement("loginBtn").addEventListener("click", (event) => {
     event.preventDefault();
-    console.log("Add Money Button Clicked!");
-    this.classList.add("border-[#141414CC]");
-    const ac = ["01716884927", "01540307370"];
-    const pin = [2468, 8642];
-    let acpinMathed = 0;
-    const bankNameUSER = document.getElementById("bankName").value;
-    const bankAcUSR = parseInt(document.getElementById("bankACNum").value);
-    const amountToAddUSR = parseInt(document.getElementById("amountToAdd").value);
-    const pinToAddUSR = parseInt(document.getElementById("pinToAdd").value);
-    for(let i = 0; i < ac.length; i++) {
-        if (parseInt(ac[i]) === bankAcUSR && pin[i] === pinToAddUSR) {
-            balanceCurrent += amountToAddUSR;
-            document.getElementById("balanceToUse").innerText = balanceCurrent;
-            alert(amountToAddUSR + " BDT Added!");
-            acpinMathed++;
-        } 
+    window.location.href = "../index.html";
+  });
+
+  getElement("transactions-Btn").addEventListener("click", (event) => {
+  event.preventDefault();
+  goHome();
+  getElement("transactions-Window").style.display = "block";
+  });
+}
+
+// TRANSACTION LOGIC
+function handleAddMoney() {
+  const BANK_ACCOUNTS = [
+    { ac: "01716884927", pin: 2468 },
+    { ac: "01540307370", pin: 8642 },
+  ];
+
+  getElement("addMoneyBtn").addEventListener("click", (event) => {
+    event.preventDefault();
+    const bankAcUSR = getValue("bankACNum");
+    const amountToAddUSR = getIntValue("amountToAdd");
+    const pinToAddUSR = getIntValue("pinToAdd");
+    let accountMatched = false;
+
+    for (let account of BANK_ACCOUNTS) {
+      if (account.ac === bankAcUSR && account.pin === pinToAddUSR) {
+        balanceCurrent += amountToAddUSR;
+        getElement("balanceToUse").innerText = balanceCurrent;
+        showAlert(`${amountToAddUSR} BDT Added!`);
+        aboutTransaction("Add Money", amountToAddUSR);
+        accountMatched = true;
+        break; 
+      }
     }
-    if (acpinMathed === 0) {
-        console.log("Wrong Information!");
-        alert("Wrong Information!");
-    } else {
-        // goHome();
-    } 
-})
-// Cash Out Handling
-document.getElementById("cashOutBtn").addEventListener("click", function(event){
-    const agentNumber = document.getElementById("agentNumber").value;
-    const amountToOut = parseInt(document.getElementById("amountToOut").value);
-    const pinToOut = parseInt(document.getElementById("pinToOut").value);
-    console.log(pinToOut);
-    if (pinToOut === ACCOUNT_PIN && agentNumber.toString().length === 11) {
-        if (amountToOut > balanceCurrent) {
-            alert("Insufficient balance!");
-        } else {
-        balanceCurrent = balanceCurrent - amountToOut;
-        document.getElementById("balanceToUse").innerText = balanceCurrent;
-        alert(amountToOut + " BDT Cash Out Done!");
-        }
-    } else {
-        alert("Wrong Information!");
+    if (!accountMatched) {
+      showAlert("Wrong Information!");
     }
-})
-// TranferMoney
-document.getElementById("transferMoneyBtn").addEventListener("click", function(event){
-    const userNumber = document.getElementById("userNumber").value;
-    const amountTransfer = parseInt(document.getElementById("amountTransfer").value);
-    const pinToTransfer = parseInt(document.getElementById("pinToTransfer").value);
-        if (userNumber.toString().length === 11 && pinToTransfer === ACCOUNT_PIN) {
-        if (amountTransfer > balanceCurrent) {
-            alert("Insufficient balance!");
-        } else {
-            balanceCurrent = balanceCurrent - amountTransfer;
-            document.getElementById("balanceToUse").innerText = balanceCurrent;
-            alert(amountTransfer + " BDT Transferred!");
-        }
+  });
+}
+
+function handleCashOut() {
+  getElement("cashOutBtn").addEventListener("click", (event) => {
+    event.preventDefault();
+    const agentNumber = getValue("agentNumber");
+    const amountToOut = getIntValue("amountToOut");
+    const pinToOut = getIntValue("pinToOut");
+    if (pinToOut === ACCOUNT_PIN && agentNumber.length === 11) {
+      if (amountToOut > balanceCurrent) {
+        showAlert("Insufficient balance!");
+      } else {
+        balanceCurrent -= amountToOut;
+        getElement("balanceToUse").innerText = balanceCurrent;
+        showAlert(`${amountToOut} BDT Cash Out Done!`);
+        aboutTransaction("Cash Out", amountToOut);
+      }
     } else {
-        alert("Wrong Information!");
+      showAlert("Wrong Information!");
     }
-}) 
-// GetBonus
-document.getElementById("getBonusBtn").addEventListener("click", function(event){
-    const coupon = document.getElementById("bonusCoupon").value;
-    console.log(coupon);
+  });
+}
+
+function handleTransferMoney() {
+  getElement("transferMoneyBtn").addEventListener("click", (event) => {
+    event.preventDefault();
+    const userNumber = getValue("userNumber");
+    const amountTransfer = getIntValue("amountTransfer");
+    const pinToTransfer = getIntValue("pinToTransfer");
+    if (userNumber.length === 11 && pinToTransfer === ACCOUNT_PIN) {
+      if (amountTransfer > balanceCurrent) {
+        showAlert("Insufficient balance!");
+      } else {
+        balanceCurrent -= amountTransfer;
+        getElement("balanceToUse").innerText = balanceCurrent;
+        showAlert(`${amountTransfer} BDT Transferred!`);
+        aboutTransaction("Transfer Money", amountTransfer);
+      }
+    } else {
+      showAlert("Wrong Information!");
+    }
+  });
+}
+
+function handleGetBonus() {
+  getElement("getBonusBtn").addEventListener("click", (event) => {
+    event.preventDefault();
+    const coupon = getValue("bonusCoupon");
     if (coupon === ACCOUNT_COUPON) {
-        balanceCurrent = balanceCurrent + 100;
-        document.getElementById("balanceToUse").innerText = balanceCurrent;
-        alert(coupon + "BDT Bonus Added!");
+      balanceCurrent += 100;
+      getElement("balanceToUse").innerText = balanceCurrent;
+      showAlert("Bonus of 100 BDT Added!");
+      aboutTransaction("Bonus Copon", "100");
     } else {
-        alert("Invalid Coupon!");
+      showAlert("Invalid Coupon!");
     }
-}) 
+  });
+}
+
+function handlePayBill() {
+  getElement("payBillBtn").addEventListener("click", (event) => {
+    event.preventDefault();
+    const payFor = getValue("payFor");
+    const billerAC = getValue("billerAC");
+    const amountToPay = getIntValue("amountToPay");
+    const pinToPay = getIntValue("pinToPay");
+    if (pinToPay === ACCOUNT_PIN && billerAC.length === 11) {
+      if (amountToPay <= balanceCurrent) {
+        balanceCurrent -= amountToPay;
+        getElement("balanceToUse").innerText = balanceCurrent;
+        showAlert(`${amountToPay} BDT Paid!`);
+        aboutTransaction(payFor, amountToPay);
+      } else {
+          showAlert("Insufficient balance!");
+        }
+    } else {
+      showAlert("Invalid Informatin!");
+    }
+  });
+};
+
+function aboutTransaction(type, amount) {
+  let transaction = {
+    Name: type,
+    Amount: amount,
+    Time: new Date().toLocaleTimeString() 
+  };
+  transactionData.push(transaction);
+  console.log(transaction);
+};
+
+function handleTransactions() {
+  getElement("transactions-Btn").addEventListener("click", (event) => {
+    const headDivofHistory = getElement("transaction-history");
+    // headDivofHistory.innerHTML = ""; 
+    if (transactionData.length === 0) {
+      headDivofHistory.innerHTML = `<p class="text-center text-gray-500 mt-4">No transactions yet.</p>`;
+      return; 
+    }
+    for(const history of transactionData) {
+      const historyDiv = document.createElement("div");
+      historyDiv.innerHTML = `
+        <div class="bg-white rounded-xl p-3 flex justify-between items-center mt-3">
+              <div class="flex items-center">
+                  <div class="p-3 rounded-full bg-[#f4f5f7]">
+                          <img src="../assets/wallet1.png" class="mx-auto" alt="" />
+                        </div>
+                        <div class="ml-3">
+                            <h1>${history.Name}</h1>
+                            <p>${history.Amount} BDT, ${history.Time}</p>
+                        </div>
+              </div>
+              <i class="fa-solid fa-ellipsis-vertical"></i>
+        </div>
+      `;
+      headDivofHistory.appendChild(historyDiv);
+    };
+  });
+};
+
+// APPLICATION START
+function initializeApp() {
+  goHome(); 
+  setupWindowToggles(); 
+  handleAddMoney(); 
+  handleCashOut(); 
+  handleTransferMoney(); 
+  handleGetBonus();
+  handlePayBill();
+  handleTransactions();
+};
+
+// Running MY SITe
+initializeApp();

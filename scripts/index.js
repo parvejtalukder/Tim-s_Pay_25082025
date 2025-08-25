@@ -9,7 +9,6 @@ function ifError() {
 }
 function logIn (id) {
     document.getElementById(id).addEventListener("click", function(event){
-        // Compare string from input field to string constant
         if (getVal(mobileNum) === mobileNumber && parseInt(getVal(pinNum)) === pinNumber) {
             console.log("All are Ok!");
             window.location.href = "./pages/home.html";
